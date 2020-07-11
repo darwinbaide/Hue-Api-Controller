@@ -4,14 +4,21 @@
 
 $xml = file_get_contents("http://192.168.1.212/api/EwxOVEswAQTG-VfGrAYqbUHmGbCAm3sKDOOC-Uz2/groups");
 $data= json_decode($xml);
-//$room= $data->{"4"};
+$room= $data->{"4"};
 
 //var_dump($data);
-//var_dump($room);
+var_dump($room);
 
 
 foreach ($data as $group){
-    echo "\n".($group->name);
+    echo "\n".($group->name)."\n";
+    if(($group->state->all_on) == true){
+        echo "ON";
+    }else{
+
+        echo "OFF";
+    }
+
 
 }
 
@@ -29,7 +36,7 @@ $data = json_encode($arrData);
   $target="lights/7/state";
 
 
-echo sendPut($data,$target);
+//echo sendPut($data,$target);
 
 function sendPut($data, $target){
 //The URL that we want to send a PUT request to.
